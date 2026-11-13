@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""cvehunt -- scan an Ubuntu/Debian host for CVEs affecting installed executables.
+"""cvewalk -- scan an Ubuntu/Debian host for CVEs affecting installed executables.
 
 A normal scan does not require root: it only reads dpkg metadata and file headers,
 and it never executes the binaries it scans.
 
 Usage:
-    python3 scan.py                          # full scan, writes report.json
-    python3 scan.py --help                   # complete option reference
-    python3 scan.py --limit 10 --json out.json
-    python3 scan.py --no-epss --no-kev       # OSV still required
+    python3 cvewalk.py                          # full scan, writes report.json
+    python3 cvewalk.py --help                   # complete option reference
+    python3 cvewalk.py --limit 10 --json out.json
+    python3 cvewalk.py --no-epss --no-kev       # OSV still required
 """
 
 from __future__ import annotations
@@ -22,11 +22,11 @@ import time
 from collections import Counter
 from pathlib import Path
 
-from cvehunt import __version__, analyze, enrich, inventory, report
-from cvehunt.osv import OsvClient, OsvError
+from cvewalk import __version__, analyze, enrich, inventory, report
+from cvewalk.osv import OsvClient, OsvError
 
 WORKDIR = Path(__file__).resolve().parent
-DEFAULT_CACHE = WORKDIR / ".cache" / "cvehunt"
+DEFAULT_CACHE = WORKDIR / ".cache" / "cvewalk"
 
 
 def detect_system() -> dict:
@@ -224,7 +224,7 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     report_data = {
-        "tool": {"name": "cvehunt", "version": __version__},
+        "tool": {"name": "cvewalk", "version": __version__},
         "scan": {
             "started": started_wall.isoformat(),
             "duration_s": round(time.monotonic() - started, 2),

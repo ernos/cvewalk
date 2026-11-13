@@ -4,13 +4,13 @@
 # OSV vulnerability record cache, KEV catalog, EPSS scores. Can be ~hundreds
 # of MB; see README "Files, caches and disk usage".
 .cache/
-# Default and alternate generated reports (JSON output of scan.py).
+# Default and alternate generated reports (JSON output of cvewalk.py).
 /report.json
 /report-*.json
 /report_*.json
 /reports/
 # Captured scan logs (the curated example-scan.txt is documentation and is kept).
-/scan-output*.txt
+/cvewalk-output*.txt
 
 # ---------------------------------------------------------------------------
 # Python bytecode, test and type-checker caches

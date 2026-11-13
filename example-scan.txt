@@ -1,6 +1,6 @@
-cvehunt 0.1.0 | security-auditor | Ubuntu 26.04.1 LTS
+cvewalk 0.2.0 | security-auditor | Ubuntu 26.04.1 LTS
 ecosystem Ubuntu:26.04:LTS | 713 packages, 1654 executables (1222 ELF), 0 unowned ELF
-data: OSV Ubuntu/Debian tracker data (519 records) + EPSS (492 scored) + CISA KEV (1779 catalog entries) | 21.5s
+data: OSV Ubuntu/Debian tracker data (519 records) + EPSS (492 scored) + CISA KEV (1779 catalog entries) | 22.0s
 
 FINDINGS: 519 CVEs across 87 source packages | KEV=1 | actionable=57 | fixable=57 | no-fix=495
 risk: CRITICAL=11, EXPLOITED=1, HIGH=145, LOW=36, MEDIUM=359

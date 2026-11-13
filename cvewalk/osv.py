@@ -19,7 +19,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 BASE_URL = "https://api.osv.dev"
-USER_AGENT = "cvehunt/0.1 (+https://osv.dev)"
+USER_AGENT = "cvewalk/0.2 (+https://osv.dev)"
 
 
 class OsvError(RuntimeError):

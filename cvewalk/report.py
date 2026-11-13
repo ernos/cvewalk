@@ -36,7 +36,7 @@ def render_console(report: dict, limit: int = 25) -> str:
 
     lines = []
     lines.append(
-        f"cvehunt {report['tool']['version']} | {report['scan']['hostname']} | "
+        f"cvewalk {report['tool']['version']} | {report['scan']['hostname']} | "
         f"{system['distro']['pretty']}"
     )
     lines.append(

@@ -6,8 +6,8 @@ import shutil
 import subprocess
 import unittest
 
-from cvehunt.debver import compare, smallest_newer
-from cvehunt.enrich import cves_for, fix_info, cvss3_score
+from cvewalk.debver import compare, smallest_newer
+from cvewalk.enrich import cves_for, fix_info, cvss3_score
 
 CASES = [
     ("1.0", "1.0"),

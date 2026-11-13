@@ -1,4 +1,4 @@
-# cvehunt
+# cvewalk
 
 Host-level CVE scanner for Ubuntu/Debian that reports **which executable file is affected**,
 the CVE id, the distro fix status, and references — using backport-aware Ubuntu data instead
@@ -36,7 +36,7 @@ of naive upstream-version matching.
 On a fully-updated Ubuntu 26.04 host, matching *upstream* versions against NVD gives
 **38 CVEs for curl 8.18.0** and **46 for openssl 3.5.5**. The distro-aware answer for the
 installed revisions is **0** and **5**. Ubuntu backports fixes into the package revision
-(`-0ubuntu0.x`) without changing the upstream version. `cvehunt` matches on the dpkg source
+(`-0ubuntu0.x`) without changing the upstream version. `cvewalk` matches on the dpkg source
 package + full Ubuntu version, so it does not report those phantom CVEs, and it attributes
 each finding to the executable files that belong to the affected binary packages.
 
@@ -64,14 +64,14 @@ No packaging, no virtualenv required:
 ```bash
 git clone <this-repo> security-auditor     # or copy the directory
 cd security-auditor
-python3 scan.py --help
+python3 cvewalk.py --help
 ```
 
 Optionally make the entry point executable:
 
 ```bash
-chmod +x scan.py
-./scan.py --help
+chmod +x cvewalk.py
+./cvewalk.py --help
 ```
 
 ## Quick start
@@ -79,11 +79,11 @@ chmod +x scan.py
 ```bash
 cd /home/ubuntu/security-auditor
 
-python3 scan.py                          # full scan -> console + report.json
-python3 scan.py --limit 10               # shorter console table
-python3 scan.py --json out/report.json   # custom JSON location (create out/ first)
-python3 scan.py --fail-on kev            # CI-style: exit 1 if a KEV CVE is found
-python3 scan.py --no-epss --no-kev       # skip optional enrichment
+python3 cvewalk.py                          # full scan -> console + report.json
+python3 cvewalk.py --limit 10               # shorter console table
+python3 cvewalk.py --json out/report.json   # custom JSON location (create out/ first)
+python3 cvewalk.py --fail-on kev            # CI-style: exit 1 if a KEV CVE is found
+python3 cvewalk.py --no-epss --no-kev       # skip optional enrichment
 python3 -m unittest discover -s tests    # run the test suite
 ```
 
@@ -94,7 +94,7 @@ directory).
 ## Usage
 
 ```
-usage: scan.py [-h] [--json JSON] [--cache-dir CACHE_DIR]
+usage: cvewalk.py [-h] [--json JSON] [--cache-dir CACHE_DIR]
                [--ecosystem ECOSYSTEM] [--extra-path EXTRA_PATH]
                [--limit LIMIT] [--no-epss] [--no-kev] [--refresh]
                [--fail-on {none,kev,critical,any}] [--quiet]
@@ -103,7 +103,7 @@ usage: scan.py [-h] [--json JSON] [--cache-dir CACHE_DIR]
 Flags can be combined in any order, e.g.:
 
 ```bash
-python3 scan.py --json "$ARTIFACTS/report.json" --limit 50 --fail-on critical --quiet
+python3 cvewalk.py --json "$ARTIFACTS/report.json" --limit 50 --fail-on critical --quiet
 ```
 
 ## Complete argument reference
@@ -114,15 +114,15 @@ python3 scan.py --json "$ARTIFACTS/report.json" --limit 50 --fail-on critical --
 - **Type:** file path.
 - **Description:** where to write the full machine-readable report. The parent directory
   must already exist; the file is overwritten if present.
-- **Example:** `python3 scan.py --json /var/log/cvehunt/2026-11-13.json`
+- **Example:** `python3 cvewalk.py --json /var/log/cvewalk/2026-11-13.json`
 
 ### `--cache-dir DIR`
 
-- **Default:** `<directory containing scan.py>/.cache/cvehunt` (absolute path).
+- **Default:** `<directory containing cvewalk.py>/.cache/cvewalk` (absolute path).
 - **Type:** directory path; created automatically if missing.
 - **Description:** location of the OSV record cache, the KEV catalog and the EPSS score cache.
   Safe to share between runs; safe to delete at any time.
-- **Example:** `python3 scan.py --cache-dir /var/cache/cvehunt`
+- **Example:** `python3 cvewalk.py --cache-dir /var/cache/cvewalk`
 
 ### `--ecosystem STRING`
 
@@ -152,7 +152,7 @@ python3 scan.py --json "$ARTIFACTS/report.json" --limit 50 --fail-on critical --
   `/opt`, `/usr/local`, `/snap`). Non-existent paths are silently skipped. Files owned by
   dpkg are still attributed via the package database; unowned ELF files are reported with
   heuristic version hints.
-- **Example:** `python3 scan.py --extra-path /srv/app/bin --extra-path /opt/vendor`
+- **Example:** `python3 cvewalk.py --extra-path /srv/app/bin --extra-path /opt/vendor`
 
 ### `--limit N`
 
@@ -195,7 +195,7 @@ python3 scan.py --json "$ARTIFACTS/report.json" --limit 50 --fail-on critical --
   - `any` — exit `1` if there is at least one finding.
   - `kev` — exit `1` if any finding appears in CISA KEV (requires KEV enabled).
   - `critical` — exit `1` if any finding has risk `CRITICAL` or `EXPLOITED`.
-- **Example:** `python3 scan.py --quiet --fail-on critical --json "$ARTIFACTS/report.json"`
+- **Example:** `python3 cvewalk.py --quiet --fail-on critical --json "$ARTIFACTS/report.json"`
 
 ### `--quiet`
 
@@ -275,7 +275,7 @@ Top-level structure:
 
 ```jsonc
 {
-  "tool":       { "name": "cvehunt", "version": "0.1.0" },
+  "tool":       { "name": "cvewalk", "version": "0.2.0" },
   "scan":       { "started", "duration_s", "hostname", "user", "args": { /* parsed CLI */ } },
   "system":     { "distro": { "id", "version", "pretty" }, "ecosystem", "kernel": { ... } },
   "inventory":  { "packages", "source_packages", "files", "executables", "elf_executables", "unowned_elf" },
@@ -378,7 +378,7 @@ Abridged real example:
 | `<cache-dir>/kev.json` | CISA KEV catalog (~1,800 entries) | 24 h; `--refresh` bypasses. |
 | `<cache-dir>/epss.json` | CVE → EPSS score map for the CVEs seen | 24 h; `--refresh` does not bypass. |
 
-The default cache is `<script-dir>/.cache/cvehunt/`. On this project's validation host, a
+The default cache is `<script-dir>/.cache/cvewalk/`. On this project's validation host, a
 519-record scan left **~540 MB** of uncompressed OSV JSON, mostly large kernel records. That
 is runtime data, not a deliverable: prune it freely, point `--cache-dir` elsewhere, or ship
 the compressed Canonical OSV tarball if you build offline support (see `DESIGN.md`).
@@ -406,7 +406,7 @@ Caches are safe to delete; deleting them only costs refetch time.
 **Routine host audit**
 
 ```bash
-python3 scan.py
+python3 cvewalk.py
 less report.json   # or jq '.summary, .findings[:5]' report.json
 ```
 
@@ -414,8 +414,8 @@ less report.json   # or jq '.summary, .findings[:5]' report.json
 
 ```bash
 mkdir -p artifacts
-python3 scan.py --quiet \
-  --json artifacts/cvehunt-report.json \
+python3 cvewalk.py --quiet \
+  --json artifacts/cvewalk-report.json \
   --fail-on critical
 case $? in
   0) echo "no critical findings";;
@@ -427,19 +427,19 @@ esac
 **Fast run without optional enrichment**
 
 ```bash
-python3 scan.py --no-epss --no-kev --limit 50
+python3 cvewalk.py --no-epss --no-kev --limit 50
 ```
 
 **Scan binaries outside package-managed paths**
 
 ```bash
-python3 scan.py --extra-path /srv/app/bin --extra-path /opt/vendor
+python3 cvewalk.py --extra-path /srv/app/bin --extra-path /opt/vendor
 ```
 
 **Explicit ecosystem override (chroot/container/odd `/etc/os-release`)**
 
 ```bash
-python3 scan.py --ecosystem Ubuntu:24.04:LTS
+python3 cvewalk.py --ecosystem Ubuntu:24.04:LTS
 ```
 
 ## Security model
@@ -510,22 +510,22 @@ Architecture and extension points are documented in [`DESIGN.md`](DESIGN.md). In
 ## Repository layout
 
 ```
-scan.py                  CLI entry point
-cvehunt/
-  __init__.py            package metadata
-  debver.py              Debian/Ubuntu version comparison (dpkg semantics)
-  inventory.py           package/file inventory + non-executing binary fingerprinting
-  osv.py                 OSV client (batch + single-query fallback, on-disk cache)
-  enrich.py              CVE ids, fix status, CVSS, EPSS, KEV, risk ordering
-  analyze.py             file<->CVE correlation, kernel asset handling
-  report.py              console + JSON rendering
-tests/test_units.py      comparator vs dpkg, fix-status isolation, CVSS, CVE ids
-DESIGN.md                architecture, hurdles, decisions, roadmap
-README.md                this file
-example-scan.txt         captured console output of a real scan
-report.json              generated report from the last local run (git-ignored)
-research/                supporting research (data sources, tooling/binary identification)
-.gitignore               generated/runtime files excluded from version control
+cvewalk.py              CLI entry point
+cvewalk/
+  __init__.py           package metadata
+  debver.py             Debian/Ubuntu version comparison (dpkg semantics)
+  inventory.py          package/file inventory + non-executing binary fingerprinting
+  osv.py                OSV client (batch + single-query fallback, on-disk cache)
+  enrich.py             CVE ids, fix status, CVSS, EPSS, KEV, risk ordering
+  analyze.py            file<->CVE correlation, kernel asset handling
+  report.py             console + JSON rendering
+tests/test_units.py     comparator vs dpkg, fix-status isolation, CVSS, CVE ids
+DESIGN.md               architecture, hurdles, decisions, roadmap
+README.md               this file
+example-scan.txt        captured console output of a real scan
+report.json             generated report from the last local run (git-ignored)
+research/               supporting research (data sources, tooling/binary identification)
+.gitignore              generated/runtime files excluded from version control
 ```
 
 ## Data licensing and code license

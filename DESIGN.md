@@ -1,6 +1,6 @@
 # Designing an Ubuntu CVE scanner with per-executable findings
 
-Status: design + working prototype (`cvehunt`). Validated against a live Ubuntu 26.04.1 LTS
+Status: design + working prototype (`cvewalk`). Validated against a live Ubuntu 26.04.1 LTS
 host on 2026-11-13. Research inputs: [`research/data-sources.md`](research/data-sources.md),
 [`research/tooling-and-binary-id.md`](research/tooling-and-binary-id.md).
 
@@ -330,7 +330,7 @@ These are the details that separate a useful scanner from a generator of noise.
 
 ## 9. Prototype in this repo: what it proves, and results
 
-`cvehunt` (Python, ~1,000 lines incl. tests) implements layers 1–4 end-to-end and was run
+`cvewalk` (Python, ~1,000 lines incl. tests) implements layers 1–4 end-to-end and was run
 against this host (`/home/ubuntu/security-auditor`, Ubuntu 26.04.1 LTS, kernel 7.0.0-38):
 
 | Metric | Result |

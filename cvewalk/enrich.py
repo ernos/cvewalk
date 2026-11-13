@@ -23,7 +23,7 @@ from .debver import compare, smallest_newer
 
 EPSS_URL = "https://api.first.org/data/v1/epss"
 KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
-USER_AGENT = "cvehunt/0.1 (+https://osv.dev)"
+USER_AGENT = "cvewalk/0.2 (+https://osv.dev)"
 
 _CVE_RE = re.compile(r"^(?:UBUNTU-CVE|DEBIAN-CVE|CVE)-(\d{4})-(\d+)$")
 
