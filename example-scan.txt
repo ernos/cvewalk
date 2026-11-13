@@ -1,0 +1,64 @@
+cvehunt 0.1.0 | security-auditor | Ubuntu 26.04.1 LTS
+ecosystem Ubuntu:26.04:LTS | 713 packages, 1654 executables (1222 ELF), 0 unowned ELF
+data: OSV Ubuntu/Debian tracker data (519 records) + EPSS (492 scored) + CISA KEV (1779 catalog entries) | 21.5s
+
+FINDINGS: 519 CVEs across 87 source packages | KEV=1 | actionable=57 | fixable=57 | no-fix=495
+risk: CRITICAL=11, EXPLOITED=1, HIGH=145, LOW=36, MEDIUM=359
+
+RISK       CVE              CVSS  EPSS   KEV  PACKAGE (installed)                     FIX                     EXECUTABLE                        
+---------  ---------------  ----  -----  ---  --------------------------------------  ----------------------  ----------------------------------
+EXPLOITED  CVE-2026-111497  9.8   0.826  yes  brotli 1.2.0-3build1                    1.2.0-3ubuntu0.1        /usr/lib/x86_64-linux-gnu/libbrot…
+HIGH       CVE-2026-94300   8.1   0.009  -    bind9 1:9.20.24-1ubuntu0.4              1:9.20.24-1ubuntu0.5    /usr/bin/delv                     
+HIGH       CVE-2026-109518  -     0.009  -    apt 3.2.0                               3.2.1ubuntu0.1          /usr/bin/apt                      
+HIGH       CVE-2026-82560   7.5   0.006  -    perl 5.40.1-7ubuntu0.3                  5.40.1-7ubuntu0.4       /usr/bin/corelist                 
+MEDIUM     CVE-2026-102274  5.9   0.005  -    pyjwt 2.10.1-4ubuntu1.2                 2.10.1-4ubuntu1.3       -                                 
+HIGH       CVE-2026-119195  7.5   0.005  -    pyasn1 0.6.3-1ubuntu0.1                 0.6.3-1ubuntu0.2        -                                 
+HIGH       CVE-2026-85091   7.4   0.005  -    zlib 1:1.3.dfsg+really1.3.1-1ubuntu3.1  1:1.3.dfsg+really1.3.…  /usr/lib/x86_64-linux-gnu/libz.so…
+HIGH       CVE-2026-96888   7.5   0.005  -    bind9 1:9.20.24-1ubuntu0.4              1:9.20.24-1ubuntu0.5    /usr/bin/delv                     
+HIGH       CVE-2026-19630   7.5   0.004  -    bind9 1:9.20.24-1ubuntu0.4              1:9.20.24-1ubuntu0.5    /usr/bin/delv                     
+HIGH       CVE-2026-97313   7.5   0.004  -    bind9 1:9.20.24-1ubuntu0.4              1:9.20.24-1ubuntu0.5    /usr/bin/delv                     
+CRITICAL   CVE-2026-100075  9.8   0.004  -    linux 7.0.0-38.38                       7.0.0-42.42             kernel image (reboot required)    
+HIGH       CVE-2026-86145   8.2   0.004  -    pcre2 10.46-1build1                     10.46-1ubuntu0.1        /usr/lib/x86_64-linux-gnu/libpcre…
+HIGH       CVE-2026-119194  7.5   0.004  -    pyasn1 0.6.3-1ubuntu0.1                 0.6.3-1ubuntu0.2        -                                 
+HIGH       CVE-2026-119196  7.5   0.004  -    pyasn1 0.6.3-1ubuntu0.1                 0.6.3-1ubuntu0.2        -                                 
+HIGH       CVE-2026-119197  7.5   0.004  -    pyasn1 0.6.3-1ubuntu0.1                 0.6.3-1ubuntu0.2        -                                 
+MEDIUM     CVE-2026-101917  5.3   0.004  -    pyjwt 2.10.1-4ubuntu1.2                 2.10.1-4ubuntu1.3       -                                 
+MEDIUM     CVE-2026-106454  4.3   0.004  -    twisted 25.5.0-5ubuntu0.1               25.5.0-5ubuntu0.2       /usr/bin/cftp3                    
+MEDIUM     CVE-2026-101918  5.3   0.004  -    pyjwt 2.10.1-4ubuntu1.2                 2.10.1-4ubuntu1.3       -                                 
+MEDIUM     CVE-2026-89157   5.7   0.004  -    pcre2 10.46-1build1                     10.46-1ubuntu0.1        /usr/lib/x86_64-linux-gnu/libpcre…
+MEDIUM     CVE-2026-8674    5.3   0.003  -    glibc 2.43-2ubuntu2.4                   2.43-2ubuntu2.7         /usr/bin/gencat                   
+HIGH       CVE-2026-84243   7.0   0.003  -    glibc 2.43-2ubuntu2.4                   2.43-2ubuntu2.7         /usr/bin/gencat                   
+MEDIUM     CVE-2026-89156   2.9   0.003  -    pcre2 10.46-1build1                     10.46-1ubuntu0.1        /usr/lib/x86_64-linux-gnu/libpcre…
+MEDIUM     CVE-2026-97399   3.7   0.003  -    glibc 2.43-2ubuntu2.4                   2.43-2ubuntu2.7         /usr/bin/gencat                   
+HIGH       CVE-2026-103111  7.6   0.003  -    pcre2 10.46-1build1                     10.46-1ubuntu0.1        /usr/lib/x86_64-linux-gnu/libpcre…
+MEDIUM     CVE-2026-89160   3.7   0.003  -    pcre2 10.46-1build1                     10.46-1ubuntu0.1        /usr/lib/x86_64-linux-gnu/libpcre…
+... 527 more findings in the JSON report
+
+TOP FINDINGS WITH REFERENCES
+
+CVE-2026-111497  (brotli 1.2.0-3build1 -> fix 1.2.0-3ubuntu0.1)  [KEV 2026-10-27]
+   https://osv.dev/vulnerability/UBUNTU-CVE-2026-111497
+   https://ubuntu.com/security/CVE-2026-111497
+   https://www.cve.org/CVERecord?id=CVE-2026-111497
+   https://nodejs.org/en/blog/vulnerability/october-2026-security-releases#nodejs-brotli-decoder-out-of-bounds-write-permits-remote-code-execution-cve-2026-111497---high
+   https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+   https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-114148
+
+CVE-2026-94300  (bind9 1:9.20.24-1ubuntu0.4 -> fix 1:9.20.24-1ubuntu0.5)
+   https://osv.dev/vulnerability/UBUNTU-CVE-2026-94300
+   https://ubuntu.com/security/CVE-2026-94300
+   https://www.cve.org/CVERecord?id=CVE-2026-94300
+   https://kb.isc.org/docs/cve-2026-94300
+   https://ubuntu.com/security/notices/USN-8969-1
+
+CVE-2026-109518  (apt 3.2.0 -> fix 3.2.1ubuntu0.1)
+   https://osv.dev/vulnerability/UBUNTU-CVE-2026-109518
+   https://ubuntu.com/security/CVE-2026-109518
+   https://www.cve.org/CVERecord?id=CVE-2026-109518
+   https://ubuntu.com/blog/apt-vulnerability-fixes-available
+   https://ubuntu.com/security/notices/USN-8996-1
+
+WARNINGS
+   - 495 findings have no fixed version in the OSV data. OSV does not expose Ubuntu tracker status, so this set can include CVEs Canonical marked deferred/ignored (will-not-fix); cross-check ubuntu-cve-tracker or OVAL before treating them as actionable.
+
+JSON report written to report.json

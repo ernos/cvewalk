@@ -1,0 +1,83 @@
+# ---------------------------------------------------------------------------
+# Runtime data and generated artifacts (not needed in a production upload)
+# ---------------------------------------------------------------------------
+# OSV vulnerability record cache, KEV catalog, EPSS scores. Can be ~hundreds
+# of MB; see README "Files, caches and disk usage".
+.cache/
+# Default and alternate generated reports (JSON output of scan.py).
+/report.json
+/report-*.json
+/report_*.json
+/reports/
+# Captured scan logs (the curated example-scan.txt is documentation and is kept).
+/scan-output*.txt
+
+# ---------------------------------------------------------------------------
+# Python bytecode, test and type-checker caches
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# Python build/packaging artifacts and virtual environments
+# ---------------------------------------------------------------------------
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+
+# ---------------------------------------------------------------------------
+# Editors / IDEs / OS metadata
+# ---------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+desktop.ini
+.ipynb_checkpoints/
+.direnv/
+
+# ---------------------------------------------------------------------------
+# Logs, temporary files, backups and patch leftovers
+# ---------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+
+# ---------------------------------------------------------------------------
+# Secrets/local configuration (never commit credentials)
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+secrets/
