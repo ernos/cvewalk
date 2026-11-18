@@ -9,6 +9,7 @@
 /report-*.json
 /report_*.json
 /reports/
+json-report.json
 # Captured scan logs (the curated example-scan.txt is documentation and is kept).
 /cvewalk-output*.txt
 

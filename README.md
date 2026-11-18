@@ -62,8 +62,8 @@ warm cache (network-dependent). Every fixable finding was cross-checked against
 No packaging, no virtualenv required:
 
 ```bash
-git clone <this-repo> security-auditor     # or copy the directory
-cd security-auditor
+git clone https://github.com/ernos/cvewalk.git     # or copy the directory
+cd cvewalk
 python3 cvewalk.py --help
 ```
 
@@ -77,7 +77,7 @@ chmod +x cvewalk.py
 ## Quick start
 
 ```bash
-cd /home/ubuntu/security-auditor
+cd cvewalk
 
 python3 cvewalk.py                          # full scan -> console + report.json
 python3 cvewalk.py --limit 10               # shorter console table
